@@ -1,0 +1,19 @@
+# ROS2
+build/
+install/
+log/
+.colcon/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Misc
+rosgraph.dot
+rosgraph.png
