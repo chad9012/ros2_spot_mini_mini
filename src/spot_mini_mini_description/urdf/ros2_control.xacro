@@ -1,15 +1,10 @@
 <?xml version="1.0" ?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- 
-    Inner macro — defines 3 joints per leg
-    Mirrors quadruped_transmission from transmissions.xacro but for ROS2
-    Bug fixed: upper/lower leg joint names were swapped in original
-  -->
   <xacro:macro name="leg_ros2_control" params="leg">
 
     <joint name="motor_${leg}_hip">
-      <command_interface name="effort"/>
+      <command_interface name="position"/>
       <state_interface name="position">
         <param name="initial_value">0.0</param>
       </state_interface>
@@ -19,7 +14,7 @@
     </joint>
 
     <joint name="motor_${leg}_upper_leg">
-      <command_interface name="effort"/>
+      <command_interface name="position"/>
       <state_interface name="position">
         <param name="initial_value">0.785</param>
       </state_interface>
@@ -29,7 +24,7 @@
     </joint>
 
     <joint name="motor_${leg}_lower_leg">
-      <command_interface name="effort"/>
+      <command_interface name="position"/>
       <state_interface name="position">
         <param name="initial_value">-1.57</param>
       </state_interface>
@@ -39,23 +34,14 @@
     </joint>
 
   </xacro:macro>
-  <!--
-    Outer macro — called once from spot.urdf.xacro
-    Contains the full ros2_control block with hardware plugin
-    and calls leg_ros2_control for all 4 legs
-  -->
+
   <xacro:macro name="spot_ros2_control">
     <ros2_control name="SpotMiniMiniSystem" type="system">
 
       <hardware>
-        <!-- 
-          Replaces: libgazebo_ros_control.so (ROS1)
-          This plugin bridges Gazebo Harmonic and ros2_control
-        -->
         <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </hardware>
 
-      <!-- Same 4 legs as the original transmission calls -->
       <xacro:leg_ros2_control leg="front_left"/>
       <xacro:leg_ros2_control leg="front_right"/>
       <xacro:leg_ros2_control leg="back_left"/>
