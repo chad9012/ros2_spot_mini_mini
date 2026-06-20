@@ -14,7 +14,7 @@ namespace tele
     public:
         Teleop(const int & linear_x, const int & linear_y, const int & linear_z,
                const int & angular, const double & l_scale, const double & a_scale,
-               const int & LB, const int & RB, const int & B_scale, const int & LT,
+               const int & LB, const int & RB, const double & B_scale, const int & LT,
                const int & RT, const int & UD, const int & LR,
                const int & sw, const int & es);
 

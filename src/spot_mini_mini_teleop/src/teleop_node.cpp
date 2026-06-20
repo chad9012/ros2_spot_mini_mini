@@ -19,8 +19,8 @@ int main(int argc, char** argv)
 
     // Declare and retrieve parameters safely
     node->declare_parameter("frequency", 60.0);
-    node->declare_parameter("axis_linear_x", 4);
-    node->declare_parameter("axis_linear_y", 3);
+    node->declare_parameter("axis_linear_x", 3);
+    node->declare_parameter("axis_linear_y", 2);
     node->declare_parameter("axis_linear_z", 1);
     node->declare_parameter("axis_angular", 0);
     node->declare_parameter("scale_linear", 1.0);
@@ -28,10 +28,10 @@ int main(int argc, char** argv)
     node->declare_parameter("scale_bumper", 1.0);
     node->declare_parameter("button_switch", 0);
     node->declare_parameter("button_estop", 1);
-    node->declare_parameter("rb", 5);
-    node->declare_parameter("lb", 2);
-    node->declare_parameter("rt", 5);
-    node->declare_parameter("lt", 4);
+    node->declare_parameter("rb", 7);
+    node->declare_parameter("lb", 6);
+    node->declare_parameter("rt", 4);
+    node->declare_parameter("lt", 5);
     node->declare_parameter("updown", 7);
     node->declare_parameter("leftright", 6);
     node->declare_parameter("debounce_thresh", 0.15);

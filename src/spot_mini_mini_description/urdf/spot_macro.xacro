@@ -74,9 +74,11 @@
       </visual>
 
       <collision>
-        <origin rpy="${origin_rpy}" xyz="${c_xyz}" />
+        <!-- <origin rpy="${origin_rpy}" xyz="${c_xyz}" /> -->
+        <origin rpy="0 0 0" xyz="0 0 0" />
         <geometry>
-          <mesh filename="${meshfile}" scale="${meshscale}"/>
+          <!-- <mesh filename="${meshfile}" scale="${meshscale}"/> -->
+          <sphere radius="${radius}"/>
         </geometry>
         <contact_coefficients mu="10.1"/>
       </collision>

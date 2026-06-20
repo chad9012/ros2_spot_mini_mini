@@ -51,7 +51,7 @@ class HoldPosition(Node):
         super().__init__('hold_position')
         self.publisher = self.create_publisher(
             JointTrajectory,
-            '/joint_trajectory_controller/joint_trajectory',
+            '/spot/joint_trajectory_controller/joint_trajectory',
             10
         )
         # Send command after 2 seconds

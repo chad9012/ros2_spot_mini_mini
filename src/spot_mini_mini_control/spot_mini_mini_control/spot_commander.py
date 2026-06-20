@@ -267,32 +267,13 @@ class SpotCommander(Node):
         self.publish_joint_trajectory(joint_angles)
 
     def publish_joint_trajectory(self, joint_angles):
-        """
-        Converts 4x3 joint_angles array to JointTrajectory message
-        and publishes to joint_trajectory_controller.
-
-        joint_angles shape: (4, 3)
-          row 0: FL [hip, upper, lower]
-          row 1: FR [hip, upper, lower]
-          row 2: BL [hip, upper, lower]
-          row 3: BR [hip, upper, lower]
-
-        Flattened order matches JOINT_NAMES list above.
-        """
         msg = JointTrajectory()
         msg.joint_names = JOINT_NAMES
 
         point = JointTrajectoryPoint()
-
-        # Flatten 4x3 → 12 joint angles in correct order
-        point.positions  = joint_angles.flatten().tolist()
-        point.velocities = [0.0] * 12
-
-        # Execute immediately — dt matches control frequency
-        point.time_from_start = Duration(
-            sec=0,
-            nanosec=int(self.dt * 1e9)
-        )
+        point.positions = joint_angles.flatten().tolist()
+        # NO velocities — let controller interpolate smoothly
+        # NO time_from_start — zero means "execute immediately"
 
         msg.points = [point]
         self.joint_pub.publish(msg)

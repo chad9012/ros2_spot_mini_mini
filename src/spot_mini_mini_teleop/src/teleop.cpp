@@ -4,7 +4,7 @@ namespace tele
 {
     Teleop::Teleop(const int & linear_x, const int & linear_y, const int & linear_z,
                    const int & angular, const double & l_scale, const double & a_scale,
-                   const int & LB, const int & RB, const int & B_scale, const int & LT,
+                   const int & LB, const int & RB, const double & B_scale, const int & LT,
                    const int & RT, const int & UD, const int & LR,
                    const int & sw, const int & es)
     {
@@ -34,23 +34,32 @@ namespace tele
 
     void Teleop::joyCallback(const sensor_msgs::msg::Joy::ConstSharedPtr joy)
     {
-        // ROS 2 signatures protect bounds check safely
-        if(joy->axes.size() > (size_t)std::max({linear_x_, linear_y_, linear_z_, angular_, RB_, LB_, UD_, LR_})) {
-            twist.linear.x = l_scale_ * joy->axes[linear_x_];
-            twist.linear.y = l_scale_ * joy->axes[linear_y_];
-            twist.linear.z = -l_scale_ * joy->axes[linear_z_];
-            twist.angular.z = a_scale_ * joy->axes[angular_];
-            twist.angular.x = B_scale_ * joy->axes[RB_];
-            twist.angular.y = B_scale_ * joy->axes[LB_];
+        // ── AXES: sticks, triggers, D-pad ─────────────────────────────
+        // Only check axis indices that are actually axes
+        if(joy->axes.size() > (size_t)std::max({linear_x_, linear_y_, linear_z_, angular_, RT_, LT_, UD_, LR_})) {
+            twist.linear.x  = l_scale_ * joy->axes[linear_x_];
+            twist.linear.y  = -l_scale_ * joy->axes[linear_y_];
+            twist.linear.z  = l_scale_ * joy->axes[linear_z_];   // inverted for height
+            twist.angular.z = -a_scale_ * joy->axes[angular_];
+
+            // TRIGGERS: faster / slower (restore original functionality)
+            // RT (axis 4): default 1.0, pressed -1.0 → convert to 0/1
+            twist.angular.x = (joy->axes[RT_] < 0.0) ? B_scale_ : 0.0;
+            // LT (axis 5): default 1.0, pressed -1.0 → convert to 0/1
+            twist.angular.y = (joy->axes[LT_] < 0.0) ? B_scale_ : 0.0;
+            
+            // D-pad for clearance/penetration (discrete -1, 0, +1)
             updown = static_cast<int>(joy->axes[UD_]);
-            leftright = static_cast<int>(-joy->axes[LR_]);
+            leftright = static_cast<int>(-joy->axes[LR_]);         // inverted
         }
 
-        if(joy->buttons.size() > (size_t)std::max({sw_, es_, LT_, RT_})) {
+        // ── BUTTONS: A, B, LB, RB ───────────────────────────────────
+        // Only check button indices that are actually buttons
+        if(joy->buttons.size() > (size_t)std::max({sw_, es_, LB_, RB_})) {
             switch_trigger = joy->buttons[sw_];
             ESTOP = joy->buttons[es_];
-            left_bump = joy->buttons[LT_];
-            right_bump = joy->buttons[RT_];
+            left_bump  = joy->buttons[LB_];   // FIXED: LB is a button
+            right_bump = joy->buttons[RB_];   // FIXED: RB is a button
         }
     }
 

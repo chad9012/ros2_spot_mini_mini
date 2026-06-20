@@ -56,8 +56,8 @@ namespace spot
                 cmd.yaw        = 0.0;
                 // Bumpers change clearance height
                 // wx = right bumper, wy = left bumper
-                cmd.faster     =  (1.0 - wx);
-                cmd.slower     = -(1.0 - wy);
+                cmd.faster     = wx;
+                cmd.slower     = wy;
             }
             else
             {

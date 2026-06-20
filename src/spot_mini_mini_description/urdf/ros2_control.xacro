@@ -1,8 +1,7 @@
 <?xml version="1.0" ?>
-<<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:macro name="leg_ros2_control" params="leg">
-
     <joint name="motor_${leg}_hip">
       <command_interface name="position"/>
       <state_interface name="position">
@@ -12,7 +11,6 @@
         <param name="initial_value">0.0</param>
       </state_interface>
     </joint>
-
     <joint name="motor_${leg}_upper_leg">
       <command_interface name="position"/>
       <state_interface name="position">
@@ -22,7 +20,6 @@
         <param name="initial_value">0.0</param>
       </state_interface>
     </joint>
-
     <joint name="motor_${leg}_lower_leg">
       <command_interface name="position"/>
       <state_interface name="position">
@@ -32,21 +29,17 @@
         <param name="initial_value">0.0</param>
       </state_interface>
     </joint>
-
   </xacro:macro>
 
   <xacro:macro name="spot_ros2_control">
     <ros2_control name="SpotMiniMiniSystem" type="system">
-
       <hardware>
         <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </hardware>
-
       <xacro:leg_ros2_control leg="front_left"/>
       <xacro:leg_ros2_control leg="front_right"/>
       <xacro:leg_ros2_control leg="back_left"/>
       <xacro:leg_ros2_control leg="back_right"/>
-
     </ros2_control>
   </xacro:macro>
 

@@ -42,24 +42,6 @@ def generate_launch_description():
         package='spot_mini_mini_teleop',
         executable='teleop_node',
         name='spot_teleop',
-        parameters=[{
-            'frequency':      200.0,
-            'axis_linear_x':  4,
-            'axis_linear_y':  3,
-            'axis_linear_z':  1,
-            'axis_angular':   0,
-            'scale_linear':   1.0,
-            'scale_angular':  1.0,
-            'scale_bumper':   1.0,
-            'button_switch':  0,
-            'button_estop':   1,
-            'rb':             5,
-            'lb':             2,
-            'rt':             5,
-            'lt':             4,
-            'updown':         7,
-            'leftright':      6,
-        }],
         output='screen'
     )
 
@@ -70,10 +52,6 @@ def generate_launch_description():
         package='spot_mini_mini_teleop',
         executable='spot_sm_node',
         name='spot_sm',
-        parameters=[{
-            'frequency': 200.0,
-            'timeout':   1.0,
-        }],
         output='screen'
     )
 

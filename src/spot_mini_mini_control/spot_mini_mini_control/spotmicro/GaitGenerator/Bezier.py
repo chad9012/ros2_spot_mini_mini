@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 from spot_mini_mini_control.spotmicro.Kinematics.LieAlgebra import TransToRp
 import copy
@@ -193,9 +195,9 @@ class BezierGait():
            :param k: Bezier point number
            :returns: Binomial solution
         """
-        return np.math.factorial(self.NumControlPoints) / (
-            np.math.factorial(k) *
-            np.math.factorial(self.NumControlPoints - k))
+        return math.factorial(self.NumControlPoints) / (
+            math.factorial(k) *
+            math.factorial(self.NumControlPoints - k))
 
     def BezierSwing(self, phase, L, LateralFraction, clearance_height=0.04):
         """Calculates the step coordinates for the Bezier (swing) period
