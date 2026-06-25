@@ -179,7 +179,7 @@ class SpotCommander(Node):
             self.StepVelocity = self.BaseStepVelocity
             self.SwingPeriod = np.clip(
                 self.BaseSwingPeriod +
-                (-self.mini_cmd.faster + -self.mini_cmd.slower) * SV_SCALE,
+                (-self.mini_cmd.faster +self.mini_cmd.slower) * SV_SCALE,
                 0.1, 0.3
             )
 

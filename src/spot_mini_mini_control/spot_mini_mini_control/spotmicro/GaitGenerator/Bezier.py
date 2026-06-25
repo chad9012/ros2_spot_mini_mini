@@ -459,10 +459,22 @@ class BezierGait():
 
            :returns: Foot Coordinates relative to unmodified body
         """
-        # First, get Tstance from desired speed and stride length
+# First, get Tstance from desired speed and stride length
         # NOTE: L is HALF of stride length
-        if vel != 0.0:
+        #
+        # FIX: original logic only computed Tstance from forward velocity (vel/L),
+        # so a pure YawRate command (L=0, vel=0) produced Tstance=0, which then
+        # forcibly zeroed YawRate below — making in-place rotation impossible.
+        # We now also derive a stance time from YawRate alone when there is no
+        # forward motion requested, so rotation-only commands still produce a
+        # valid non-zero Tstance and aren't wiped out.
+        if L != 0.0 and vel != 0.0:
             Tstance = 2.0 * abs(L) / abs(vel)
+        elif YawRate != 0.0:
+            # Pure rotation requested (no forward stepping) — use the
+            # configured swing period as the stance reference so rotation
+            # has a valid non-zero Tstance to operate with.
+            Tstance = self.Tswing
         else:
             Tstance = 0.0
             L = 0.0
