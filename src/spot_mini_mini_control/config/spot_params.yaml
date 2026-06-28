@@ -1,0 +1,34 @@
+spot_agent_commander:
+  ros__parameters:
+    Agent: true
+    contacts: false
+    agent_num: 0
+    STEPLENGTH_SCALE: 0.06
+    Z_SCALE_CTRL: 0.12
+    RPY_SCALE: 0.6
+    SV_SCALE: 0.1
+    CHPD_SCALE: 0.0005
+    YAW_SCALE: 1.5
+    CD_SCALE: 0.01
+    SLV_SCALE: 0.1
+    RESIDUALS_SCALE: 0.01
+    Z_SCALE: 0.01
+    alpha: 0.5
+    actions_to_filter: -1
+    BaseStepVelocity: 0.1
+    Tswing: 0.2
+    SwingPeriod_LIMITS: [0.1, 0.3]
+    BaseClearanceHeight: 0.04
+    BasePenetrationDepth: 0.005
+    ClearanceHeight_LIMITS: [0.02, 0.08]
+    PenetrationDepth_LIMITS: [-0.01, 0.01]
+    shoulder_length: 0.055
+    elbow_length: 0.1075
+    wrist_length: 0.035
+    hip_x: 0.192
+    hip_y: 0.085
+    foot_x: 0.192
+    foot_y: 0.085
+    height: 0.17
+    com_offset: 0.0
+    dt: 0.01
