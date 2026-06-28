@@ -27,8 +27,8 @@ from builtin_interfaces.msg import Duration
 from spot_mini_mini_interfaces.msg import MiniCmd, JoyButtons
 
 # Pure math imports — no ROS, no PyBullet
-from spot_mini_mini_control.spotmicro.Kinematics.SpotKinematics import SpotModel
-from spot_mini_mini_control.spotmicro.GaitGenerator.Bezier import BezierGait
+from spot_mini_mini_pybullet.spotmicro.Kinematics.SpotKinematics import SpotModel
+from spot_mini_mini_pybullet.spotmicro.GaitGenerator.Bezier import BezierGait
 
 # ── Controller Scaling Constants ─────────────────────────────────────────────
 # Identical to original spot_pybullet_interface.py

@@ -51,8 +51,8 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
-install(DIRECTORY policies
-  DESTINATION share/${PROJECT_NAME}
-)
+# install(DIRECTORY policies
+#   DESTINATION share/${PROJECT_NAME}
+# )
 
 ament_package()

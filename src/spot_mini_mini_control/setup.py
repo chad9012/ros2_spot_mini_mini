@@ -16,6 +16,8 @@ setup(
             glob('launch/*.py')),
         (os.path.join('share', package_name, 'config'),
             glob('config/*.yaml')),
+        (os.path.join('share', package_name, 'policies'),
+            glob('policies/*.npy')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -27,6 +29,7 @@ setup(
     entry_points={
         'console_scripts': [
             'spot_commander = spot_mini_mini_control.spot_commander:main',
+            'spot_agent_commander = spot_mini_mini_control.spot_agent_commander:main',
         ],
     },
 )
